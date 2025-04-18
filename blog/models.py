@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now 
 
 # Model de Categorias
 class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField(blank=True, null=True)
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(default=now)
     updated_on = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     #corrigir o nome de categorys para categories
@@ -25,7 +26,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts", default=1)  
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField("Category", related_name="posts") #relacionamento entre post e categories 
@@ -64,12 +65,12 @@ class Comment(models.Model):
 # Model de Reações (curtidas ou interações)
 class Reaction(models.Model):
     REACTION_CHOICES = [
-        ('like', 'Like'),
-        ('love', 'Love'),
-        ('haha', 'Haha'),
-        ('wow', 'Wow'),
-        ('sad', 'Sad'),
-        ('angry', 'Angry'),
+        ('like', '👍'),
+        ('love', '❤️'),
+        ('haha', '😂'),
+        ('wow', '😲'),
+        ('sad', '😢'),
+        ('angry', '😡'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reactions")
@@ -83,11 +84,11 @@ class Reaction(models.Model):
         unique_together = ("user", "post")
 
     def __str__(self):
-        return f"{self.user.username} reacted {self.reaction_type} on '{self.post.title}'"
+        return f"{self.user.username} reagiu {self.reaction_type} em '{self.post.title}'"
 
     @property
     def reaction_summary(self):
-        return f"{self.reaction_type} by {self.user.username}"
+        return f"{self.reaction_type} por {self.user.username}"
 
 # Model de Pontuação de Post (PostRating)
 class PostRating(models.Model):
@@ -110,24 +111,29 @@ class PostRating(models.Model):
     def rating_summary(self):
         return f"{self.rating} estrelas - {self.user.username}"
 
-# Model de Histórico de Edição (EditHistory)
-class EditHistory(models.Model):
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name="edit_history")
-    edited_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    previous_content = models.TextField()
-    edited_on = models.DateTimeField(auto_now_add=True)
-    change_summary = models.TextField(blank=True, null=True)
+# Model de Sugestões de Post (PostSuggestion)
+class PostSuggestion(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="suggestions")  # Usuário que fez a sugestão
+    title = models.CharField(max_length=255)  # Título da sugestão
+    description = models.TextField()  # Detalhes sobre a sugestão
+    created_on = models.DateTimeField(auto_now_add=True)  # Data da sugestão
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ("pending", "⏳ Pendente"),
+            ("approved", "✅ Aprovado"),
+            ("rejected", "❌ Rejeitado"),
+        ],
+        default="pending",
+    )  # Status da sugestão
 
     class Meta:
-        ordering = ["-edited_on"]
-        verbose_name_plural = "Edit History"
+        ordering = ["-created_on"]
+        verbose_name_plural = "Post Suggestions"
 
     def __str__(self):
-        return f"Edição de {self.edited_by.username} em {self.post.title}"
+        return f"Sugestão de {self.user.username}: {self.title} ({self.get_status_display()})"
 
     @property
-    def edit_summary(self):
-        return f"Editado por {self.edited_by.username} em {self.edited_on.strftime('%d/%m/%Y %H:%M')}"
-
-
-
+    def summary(self):
+        return f"{self.title} - Status: {self.get_status_display()}"
