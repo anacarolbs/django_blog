@@ -2,14 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Personal Blog</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <style>
+        body {
+            max-width: 800px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #0077cc;
+            color: white;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            color: #ffcc00; /* Cor personalizada para o título */
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        nav a {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #0077cc;
+            color: white;
+        }
+
+        main {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #0077cc;
+            color: white;
+            border-radius: 10px;
+        }
+
+        footer p {
+            color: #ffcc00; /* Cor personalizada para o texto do rodapé */
+        }
+    </style>
 </head>
 <body>
-<h1>My Personal Blog</h1>
-<a href="{% url "blog_index" %}">Home</a>
-<hr>
-{% block page_title %}{% endblock page_title %}
-{% block page_content %}{% endblock page_content %}
+
+<header>
+    <h1>📝 My Personal Blog</h1>
+    <nav>
+        <a href="{% url 'blog_index' %}">🏠 Home</a>
+        <a href="{% url 'blog_suggestions' %}">💡 Sugestões de Post</a>
+        <a href="{% url 'submit_suggestion' %}">✍️ Enviar Sugestão</a>
+    </nav>
+</header>
+
+<main>
+    {% block page_title %}{% endblock page_title %}
+    {% block page_content %}{% endblock page_content %}
+</main>
+
+<footer>
+    <p>&copy; 2025 My Personal Blog | Criado com 💙</p>
+</footer>
+
 </body>
 </html>

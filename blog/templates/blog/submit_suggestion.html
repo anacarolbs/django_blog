@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <h2>Enviar Sugestão de Post</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Título:</label>
+        <input type="text" name="title" required>
+
+        <label for="description">Descrição:</label>
+        <textarea name="description" required></textarea>
+
+        <button type="submit">Enviar Sugestão</button>
+    </form>
+    
+    <p>Você não precisa estar logado para enviar uma sugestão! 😊</p>
+{% endblock page_content %}
+
