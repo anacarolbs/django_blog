@@ -5,6 +5,15 @@ Projeto desenvolvido para a disciplina **Aplicações para Internet - UDF**.
 ## 🎓 Sobre o Projeto
 Este projeto tem como objetivo explorar o **Django Models**, criando um sistema de blog respeitando as especificações do projeto solicitadas pelo professor.
 
+## 🎯 Objetivo 
+Criar um **blog interativo**, onde usuários possam:
+- 🔹 Publicar posts e categorias
+- 🔹 Adicionar comentários
+- 🔹 Enviar sugestões de novos posts
+- 🔹 Interagir com avaliações e reações
+- 🔹 Gerenciar conteúdo pelo **Django Admin**
+
+
 ## 👨‍🏫 Alunos
 - Ana Carolina Barbosa de Souza - 27649865
 - Fernando Rodrigues Leite Soares - 27727424
@@ -16,7 +25,6 @@ Este projeto tem como objetivo explorar o **Django Models**, criando um sistema 
 - SQLite/PostgreSQL
 - Bootstrap/SimpleCSS (para estilização)
 
----
 
 ## 📌 Especificações do Projeto
 O código deve conter:
@@ -43,15 +51,6 @@ django_blog/
 
 ---
 
-## 📚 Referências
-- 📖 [Django Models](https://docs.djangoproject.com/en/5.1/topics/db/models/)
-- 📖 [Model Reference](https://docs.djangoproject.com/en/5.1/ref/models/)
-- 📖 [Queries no Django](https://docs.djangoproject.com/en/5.1/topics/db/queries/)
-- 📖 [Exemplos Práticos](https://docs.djangoproject.com/en/5.1/topics/db/examples/)
-- 📖 [Exemplo de Projeto](https://realpython.com/build-a-blog-from-scratch-django/)
-
----
-
 ## 🚀 Comandos Essenciais
 ### ▶️ **Configuração do Banco de Dados**
 ```bash
@@ -68,13 +67,11 @@ python manage.py runserver  # Iniciar servidor local
 ```bash
 python manage.py createsuperuser  # Acesso ao Django Admin
 ```
-
 ---
 
-## 🎯 Objetivo Final
-Criar um **blog interativo**, onde usuários possam:
-- 🔹 Publicar posts e categorias
-- 🔹 Adicionar comentários
-- 🔹 Enviar sugestões de novos posts
-- 🔹 Interagir com avaliações e reações
-- 🔹 Gerenciar conteúdo pelo **Django Admin**
+## 📚 Referências
+- 📖 [Django Models](https://docs.djangoproject.com/en/5.1/topics/db/models/)
+- 📖 [Model Reference](https://docs.djangoproject.com/en/5.1/ref/models/)
+- 📖 [Queries no Django](https://docs.djangoproject.com/en/5.1/topics/db/queries/)
+- 📖 [Exemplos Práticos](https://docs.djangoproject.com/en/5.1/topics/db/examples/)
+- 📖 [Exemplo de Projeto](https://realpython.com/build-a-blog-from-scratch-django/)
