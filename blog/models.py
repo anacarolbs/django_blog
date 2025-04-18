@@ -113,10 +113,10 @@ class PostRating(models.Model):
 
 # Model de Sugestões de Post (PostSuggestion)
 class PostSuggestion(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="suggestions")  # Usuário que fez a sugestão
-    title = models.CharField(max_length=255)  # Título da sugestão
-    description = models.TextField()  # Detalhes sobre a sugestão
-    created_on = models.DateTimeField(auto_now_add=True)  # Data da sugestão
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)  # Usuário opcional
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         max_length=20,
         choices=[
@@ -125,15 +125,11 @@ class PostSuggestion(models.Model):
             ("rejected", "❌ Rejeitado"),
         ],
         default="pending",
-    )  # Status da sugestão
+    )
 
     class Meta:
         ordering = ["-created_on"]
         verbose_name_plural = "Post Suggestions"
 
     def __str__(self):
-        return f"Sugestão de {self.user.username}: {self.title} ({self.get_status_display()})"
-
-    @property
-    def summary(self):
-        return f"{self.title} - Status: {self.get_status_display()}"
+        return f"Sugestão: {self.title} ({self.get_status_display()})"

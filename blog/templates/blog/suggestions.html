@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <h2>Sugestões de Post</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    {% for suggestion in suggestions %}
+        <div>
+            <h3>{{ suggestion.title }}</h3>
+            <p><strong>Usuário:</strong> {{ suggestion.user.username }}</p>
+            <p>{{ suggestion.description }}</p>
+            <p>Status: {{ suggestion.status }}</p>
+        </div>
+    {% endfor %}
+{% endblock page_content %}
