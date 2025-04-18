@@ -1,43 +1,54 @@
 <!-- blog/templates/blog/index.html -->
 
 {% block page_title %}
-    <h2>Blog Posts</h2>
+    <h2 class="page-title">📝 Blog Posts</h2>
 {% endblock page_title %}
 
 {% block page_content %}
-    {% block posts %}
+    <div class="posts-container">
         {% for post in posts %}
-            <div class="post">
-                <h3><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></h3>
-                <small>
-                    {{ post.created_on.date }} | Categorias:
-                    {% for category in post.categories.all %}
-                        <a href="{% url 'blog_category' category.name %}">
-                            {{ category.name }}
-                        </a>
-                    {% endfor %}
-                </small>
-                <p>{{ post.body | slice:":400" }}...</p>
+            <div class="post-card">
+                <h3><a href="{% url 'blog_detail' post.pk %}" class="post-title">{{ post.title }}</a></h3>
 
-                <!-- Exibir reações ao post -->
-                <p><strong>Reações:</strong> 
-                    {% for reaction in post.reactions.all %}
-                        {{ reaction.reaction_type }}
-                    {% endfor %}
-                </p>
+                <div class="post-meta">
+                    <small>📅 {{ post.created_on.date }} | 📂 Categorias:</small>
+                    <p>
+                        {% for category in post.categories.all %}
+                            <span class="category-btn">
+                                <a href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
+                            </span>
+                        {% endfor %}
+                    </p>
+                </div>                
 
-                <!-- Exibir média de avaliações -->
-                <p><strong>Avaliação:</strong> Média de 
-                    {% if post.ratings.count > 0 %}
-                        {{ post.ratings.aggregate_avg }} estrelas
-                    {% else %}
-                        Ainda sem avaliações.
-                    {% endif %}
-                </p>
+                <p class="post-content">{{ post.body | slice:":400" }}...</p>
+
+                <div class="post-extras">
+                    <p><strong>🔥 Reações:</strong> 
+                        {% if post.reactions.all %}
+                            {% for reaction in post.reactions.all %}
+                                <span class="reaction">{{ reaction.reaction_type }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="no-reaction">Nenhuma reação ainda.</span>
+                        {% endif %}
+                    </p>
+                </div>
                 
-                <!-- Link para sugestões de post -->
-                <p><a href="{% url 'blog_suggestions' %}">Ver sugestões de post</a></p>
+
+                    <p><strong>⭐ Avaliação:</strong> Média de 
+                        {% if post.ratings.count > 0 %}
+                            <span class="rating">{{ post.ratings.aggregate_avg }} estrelas</span>
+                        {% else %}
+                            <span class="no-rating">Ainda sem avaliações.</span>
+                        {% endif %}
+                    </p>
+                </div>
+
+                <p class="suggestion-link">
+                    <a href="{% url 'blog_suggestions' %}" class="btn-suggestions">💡 Ver sugestões de post</a>
+                </p>
             </div>
         {% endfor %}
-    {% endblock posts %}
+    </div>
 {% endblock page_content %}
