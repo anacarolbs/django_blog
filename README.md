@@ -6,15 +6,15 @@ Projeto desenvolvido para a disciplina **Aplicações para Internet - UDF**.
 Este projeto tem como objetivo explorar o **Django Models**, criando um sistema de blog respeitando as especificações do projeto solicitadas pelo professor.
 
 ## 👨‍🏫 Alunos
-- **Ana Carolina Barbosa de Souza - 27649865**
-- **Fernando Rodrigues Leite Soares - 27727424**
-- **Marcus Vinicius Portela da Costa - 27562689**
+- Ana Carolina Barbosa de Souza - 27649865
+- Fernando Rodrigues Leite Soares - 27727424
+- Marcus Vinicius Portela da Costa - 27562689
 
 ## 🔧 Tecnologias Utilizadas
-- **Python 3.12**
-- **Django 5.2**
-- **SQLite/PostgreSQL**
-- **Bootstrap/SimpleCSS** (para estilização)
+- Python 3.12
+- Django 5.2
+- SQLite/PostgreSQL
+- Bootstrap/SimpleCSS (para estilização)
 
 ---
 
