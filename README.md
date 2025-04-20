@@ -1,12 +1,12 @@
 # 📝 Django Blog
 
-Projeto desenvolvido para a disciplina **Aplicações para Internet - UDF**.
+Projeto desenvolvido para a disciplina **Aplicações para Internet - UDF** - 1/2025.
 
 ## 🎓 Sobre o Projeto
-Este projeto tem como objetivo explorar o **Django Models**, criando um sistema de blog respeitando as especificações do projeto solicitadas pelo professor.
+Este projeto tem como objetivo explorar o **Django Models**, criando um sistema de blog que respeite as especificações solicitadas pelo professor.
 
 ## 🎯 Objetivo 
-Criar um **blog interativo**, onde usuários possam:
+Criar um **blog**, onde usuários possam:
 - 🔹 Publicar posts e categorias
 - 🔹 Adicionar comentários
 - 🔹 Enviar sugestões de novos posts
@@ -23,7 +23,7 @@ Criar um **blog interativo**, onde usuários possam:
 - Python 3.12
 - Django 5.2
 - SQLite/PostgreSQL
-- Bootstrap/SimpleCSS (para estilização)
+- HTML/CSS (para estilização)
 
 
 ## 📌 Especificações do Projeto
