@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+
 {% block page_content %}
     {% for post in posts %}
         <h3><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></h3>
