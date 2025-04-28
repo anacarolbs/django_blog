@@ -48,7 +48,7 @@ class Comment(models.Model):
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments") #relacionamento entre post e comentarios: many-to-one relationship (muitos comentarios podem estar em UM post, mas nao pode ter o mesmo comentario em varios posts)
-#ai deletar um post, vc deleta os comentarios tambem
+#ao deletar um post, vc deleta os comentarios tambem
     is_approved = models.BooleanField(default=False)
 
     class Meta:
