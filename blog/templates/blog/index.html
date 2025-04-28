@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    <h2 class="page-title">📝 Blog Posts</h2>
+    <h2 class="page-title"> Blog Posts</h2>
 {% endblock page_title %}
 
 {% block page_content %}
@@ -25,7 +25,7 @@
                 <p class="post-content">{{ post.body | slice:":400" }}...</p>
 
                 <div class="post-extras">
-                    <p><strong>🔥 Reações:</strong> 
+                    <p><strong> Reações:</strong> 
                         {% if post.reactions.all %}
                             {% for reaction in post.reactions.all %}
                                 <span class="reaction">{{ reaction.reaction_type }}</span>
@@ -37,7 +37,7 @@
                 </div>
                 
 
-                    <p><strong>⭐ Avaliação:</strong> Média de 
+                    <p><strong> Avaliação:</strong> Média de 
                         {% if post.ratings.count > 0 %}
                             <span class="rating">{{ post.ratings.aggregate_avg }} estrelas</span>
                         {% else %}
@@ -47,7 +47,7 @@
                 </div>
 
                 <p class="suggestion-link">
-                    <a href="{% url 'blog_suggestions' %}" class="btn-suggestions">💡 Ver sugestões de post</a>
+                    <a href="{% url 'blog_suggestions' %}" class="btn-suggestions"> Ver sugestões de post</a>
                 </p>
             </div>
         {% endfor %}
