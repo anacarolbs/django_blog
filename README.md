@@ -97,24 +97,22 @@ python -m pip install Django
 ### ▶️ **Criar o projeto**
 ```bash
 django-admin startproject personal_blog 
+``` 
+### ▶️ **Criar e aplicar as migrações**
+```bash
+python manage.py makemigrations  # Criação das migrações
+python manage.py migrate         # Aplicação das migrações
 ```
 ### ▶️ **Iniciar o servidor de desenvolvimento**
 ```bash
 python manage.py runserver
 ```
 ### ▶️ **Acessar o localhost**
-http://localhost:8000  
-### ▶️ **Configuração do Banco de Dados**
+http://localhost:8000 
+### ▶️ **Criar a aplicação**
 ```bash
-python manage.py makemigrations  # Criação das migrações
-python manage.py migrate         # Aplicação das migrações
+python manage.py startapp blog
 ```
-
-### ▶️ **Executar o Servidor**
-```bash
-python manage.py runserver  # Iniciar servidor local
-```
-
 ### ▶️ **Criar Superusuário**
 ```bash
 python manage.py createsuperuser  # Acesso ao Django Admin
