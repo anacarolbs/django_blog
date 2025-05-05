@@ -46,6 +46,29 @@ class PollForm(forms.Form):
         label="Opção 3",
     )
 
+#form 
+class BlogPostForm(forms.Form):
+    title = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Digite o título do post"}),
+        label="Título",
+    )
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={"class": "form-control", "placeholder": "Digite o conteúdo do post", "rows": 6}),
+        label="Conteúdo",
+    )
+    category = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Digite a categoria"}),
+        label="Categoria",
+    )
+    tags = forms.CharField(
+        max_length=200,
+        required=False,
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Digite as tags separadas por vírgula"}),
+        label="Tags",
+    ) 
+
 #crispy_forms
 class PostSuggestionForm(forms.ModelForm):
     class Meta:

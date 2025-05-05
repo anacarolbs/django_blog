@@ -21,7 +21,7 @@
         /* Cabeçalho */
         header {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             background: linear-gradient(90deg, #4e78e4, #1527ae);
             color: white;
             border-radius: 10px;
@@ -121,6 +121,27 @@
             color: white;
         }
 
+        /* Botão de voltar ao topo */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4e78e4;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 1.2rem;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        #back-to-top:hover {
+            background-color: #1527ae;
+            transform: scale(1.1);
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             nav {
@@ -151,6 +172,7 @@
         <a href="{% url 'register_event' %}"><i class="fa-solid fa-calendar"></i> Eventos</a>
         <a href="{% url 'create_poll' %}"><i class="fa-solid fa-chart-bar"></i> Enquetes</a>
         <a href="{% url 'vote_poll' 1 %}"><i class="fa-solid fa-chart-bar"></i> Votar em Enquete</a>
+        <a href="{% url 'create_blog_post' %}"><i class="fa-solid fa-cogs"></i> Submeter Post</a>
     </nav>
 </header>
 
@@ -160,8 +182,24 @@
 </main>
 
 <footer>
+    <br>
     <p>&copy; 2025 Django Blog | Desenvolvido para Aplicações para Internet</p>
+    <br>
 </footer>
+
+<a href="#" id="back-to-top" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></a>
+
+<script>
+    const backToTopButton = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    });
+</script>
 
 </body>
 </html>

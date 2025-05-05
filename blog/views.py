@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from blog.models import Post, Comment, Category, Reaction, PostRating, PostSuggestion, VotePoll
 from django.http import HttpResponseRedirect
-from blog.forms import CommentForm, PollForm, PostSuggestionForm, NewsletterSignupForm, EventRegistrationForm
+from blog.forms import CommentForm, PollForm, BlogPostForm, PostSuggestionForm, NewsletterSignupForm, EventRegistrationForm
 
 
 
@@ -158,3 +158,19 @@ def register_event(request):
     else:
         form = EventRegistrationForm()
     return render(request, "blog/register_event.html", {"form": form})
+
+def create_blog_post(request):
+    if request.method == "POST":
+        form = BlogPostForm(request.POST)
+        if form.is_valid():
+            # Processar os dados do formulário
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]
+            category = form.cleaned_data["category"]
+            tags = form.cleaned_data["tags"]
+            # Exemplo: salvar no banco de dados (crie um modelo BlogPost, se necessário)
+            # BlogPost.objects.create(title=title, content=content, category=category, tags=tags)
+            return redirect("blog_index")  # Redirecionar após o envio
+    else:
+        form = BlogPostForm()
+    return render(request, "blog/create_blog_post.html", {"form": form})
