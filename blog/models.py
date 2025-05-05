@@ -133,3 +133,34 @@ class PostSuggestion(models.Model):
 
     def __str__(self):
         return f"Sugestão: {self.title} ({self.get_status_display()})"
+
+
+class Event(models.Model):
+    event_name = models.CharField(max_length=200)
+    date = models.DateField()
+    location = models.CharField(max_length=200)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.event_name
+
+class Poll(models.Model):
+    question = models.CharField(max_length=200)
+    option_one = models.CharField(max_length=100)
+    option_two = models.CharField(max_length=100)
+    option_three = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.question
+
+class VotePoll(models.Model):
+    question = models.CharField(max_length=200)
+    option_one = models.CharField(max_length=100)
+    option_two = models.CharField(max_length=100)
+    option_three = models.CharField(max_length=100, blank=True, null=True)
+    votes_option_one = models.IntegerField(default=0)
+    votes_option_two = models.IntegerField(default=0)
+    votes_option_three = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.question

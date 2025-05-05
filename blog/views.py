@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
-#import models
-from blog.models import Post, Comment, Category, Reaction, PostRating, PostSuggestion
+from django.shortcuts import render, redirect, get_object_or_404
+from blog.models import Post, Comment, Category, Reaction, PostRating, PostSuggestion, VotePoll
 from django.http import HttpResponseRedirect
-from blog.forms import CommentForm
+from blog.forms import CommentForm, PollForm, PostSuggestionForm, NewsletterSignupForm, EventRegistrationForm
+
+
 
 # Exibe todos os posts do blog
 def blog_index(request):
@@ -79,3 +80,81 @@ def submit_suggestion(request):
             return redirect("blog_suggestions")
 
     return render(request, "blog/submit_suggestion.html")
+
+def create_poll(request):
+    if request.method == "POST":
+        form = PollForm(request.POST)
+        if form.is_valid():
+            # Processar os dados do formulário
+            question = form.cleaned_data["question"]
+            option_one = form.cleaned_data["option_one"]
+            option_two = form.cleaned_data["option_two"]
+            option_three = form.cleaned_data.get("option_three", None)
+            # Poll.objects.create(question=question, option_one=option_one, option_two=option_two, option_three=option_three)
+            return redirect("poll_success")  # Redirecionar após o envio
+    else:
+        form = PollForm()
+    return render(request, "blog/create_poll.html", {"form": form})
+
+def poll_success(request):
+    return render(request, 'blog/poll_success.html')  
+
+def vote_poll(request, poll_id):
+    poll = get_object_or_404(VotePoll, id=poll_id)
+
+    if request.method == "POST":
+        selected_option = request.POST.get("option")
+        if selected_option == "option_one":
+            poll.votes_option_one += 1
+        elif selected_option == "option_two":
+            poll.votes_option_two += 1
+        elif selected_option == "option_three":
+            poll.votes_option_three += 1
+        poll.save()
+        return redirect("poll_results", poll_id=poll.id)  # Redirecionar para os resultados
+
+    return render(request, "blog/vote_poll.html", {"poll": poll})
+
+def poll_results(request, poll_id):
+    poll = get_object_or_404(VotePoll, id=poll_id)
+    return render(request, "blog/poll_results.html", {"poll": poll})
+
+def submit_suggestion(request):
+    if request.method == "POST":
+        form = PostSuggestionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("blog_index")  # Redirecionar após o envio
+    else:
+        form = PostSuggestionForm()
+    return render(request, "blog/submit_suggestion.html", {"form": form})
+
+
+def newsletter_signup(request):
+    if request.method == "POST":
+        form = NewsletterSignupForm(request.POST)
+        if form.is_valid():
+            # salvar o e-mail no banco de dados ou enviar para um serviço de newsletter
+            email = form.cleaned_data["email"]
+            # Exemplo: salvar no banco de dados (crie um modelo NewsletterSubscriber, se necessário)
+            # NewsletterSubscriber.objects.create(email=email)
+            return redirect("blog_index")  # Redirecionar após o cadastro
+    else:
+        form = NewsletterSignupForm()
+    return render(request, "blog/newsletter_signup.html", {"form": form})
+
+def register_event(request):
+    if request.method == "POST":
+        form = EventRegistrationForm(request.POST)
+        if form.is_valid():
+            # Salvar os dados no banco ou processá-los
+            event_name = form.cleaned_data["event_name"]
+            date = form.cleaned_data["date"]
+            location = form.cleaned_data["location"]
+            description = form.cleaned_data["description"]
+            # Exemplo: salvar no banco de dados (crie um modelo Event, se necessário)
+            # Event.objects.create(event_name=event_name, date=date, location=location, description=description)
+            return redirect("blog_index")  # Redirecionar após o envio
+    else:
+        form = EventRegistrationForm()
+    return render(request, "blog/register_event.html", {"form": form})

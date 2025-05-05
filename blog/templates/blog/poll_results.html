@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <h2>Resultados: {{ poll.question }}</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    <ul>
+        <li>{{ poll.option_one }}: {{ poll.votes_option_one }} votos</li>
+        <li>{{ poll.option_two }}: {{ poll.votes_option_two }} votos</li>
+        {% if poll.option_three %}
+        <li>{{ poll.option_three }}: {{ poll.votes_option_three }} votos</li>
+        {% endif %}
+    </ul>
+    <a href="{% url 'vote_poll' poll.id %}" class="btn btn-secondary">Voltar à Votação</a>
+{% endblock page_content %}

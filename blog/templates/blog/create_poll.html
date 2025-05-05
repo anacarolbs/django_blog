@@ -2,15 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block page_title %}
-    <h2>Enviar Sugestão de Post</h2>
+    <h2>Dê uma sugestão de Enquete</h2>
 {% endblock page_title %}
 
 {% block page_content %}
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">Enviar Sugestão</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
-    
-    <p>Você não precisa estar logado para enviar uma sugestão!</p>
 {% endblock page_content %}
