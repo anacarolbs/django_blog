@@ -3,77 +3,154 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Personal Blog</title>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <title>Django Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* Corpo da página */
         body {
-            max-width: 800px;
+            max-width: 1200px;
             margin: auto;
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+            color: #333333;
+            line-height: 1.6;
             padding: 20px;
         }
 
+        /* Cabeçalho */
         header {
             text-align: center;
             padding: 20px;
-            background-color: #4e78e4;
+            background: linear-gradient(90deg, #4e78e4, #1527ae);
             color: white;
             border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
-            color: #1527ae;
+            font-size: 3rem;
+            margin: 0;
         }
 
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #d1d9f0;
+        }
+
+        /* Navegação */
         nav {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         nav a {
             background-color: white;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 25px;
             text-decoration: none;
             color: #4e78e4;
             font-weight: bold;
-            transition: 0.3s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         nav a:hover {
-            background-color: #4e78e4;
+            background-color: #1527ae;
             color: white;
+            transform: scale(1.05);
         }
 
+        nav a.highlight {
+            background-color: #1527ae;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a.highlight:hover {
+            background-color: #4e78e4;
+            transform: scale(1.1);
+        }
+
+        /* Conteúdo principal */
         main {
-            padding: 20px;
+            padding: 30px;
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
+        main h2 {
+            font-size: 2rem;
+            color: #4e78e4;
+            margin-bottom: 20px;
+        }
+
+        /* Rodapé */
         footer {
             text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-            background-color: #4e78e4;
+            padding: 20px;
+            margin-top: 30px;
+            background: linear-gradient(90deg, #1527ae, #4e78e4);
             color: white;
             border-radius: 10px;
+            font-size: 0.9rem;
+            box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #d1d9f0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1> My Personal Blog</h1>
+    <h1>Django Blog</h1>
+    <p>Compartilhando ideias e conhecimento</p>
     <nav>
         <a href="{% url 'blog_index' %}"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="{% url 'blog_suggestions' %}"><i class="fa-solid fa-lightbulb"></i> Sugestões de Post</a>
+        <a href="{% url 'blog_suggestions' %}"><i class="fa-solid fa-lightbulb"></i> Sugestões</a>
         <a href="{% url 'submit_suggestion' %}"><i class="fa-solid fa-pen"></i> Enviar Sugestão</a>
+        <a href="{% url 'newsletter_signup' %}" class="highlight"><i class="fa-solid fa-envelope"></i> Newsletter</a>
+        <a href="{% url 'register_event' %}"><i class="fa-solid fa-calendar"></i> Eventos</a>
+        <a href="{% url 'create_poll' %}"><i class="fa-solid fa-chart-bar"></i> Enquetes</a>
+        <a href="{% url 'vote_poll' 1 %}"><i class="fa-solid fa-chart-bar"></i> Votar em Enquete</a>
     </nav>
 </header>
 
@@ -83,7 +160,8 @@
 </main>
 
 <footer>
-    <p>&copy; 2025 My Personal Blog | Disciplina Aplicações para Internet</p>
+    <p>&copy; 2025 Django Blog | Desenvolvido para Aplicações para Internet</p>
+    <p><a href="https://github.com/">GitHub</a> | <a href="https://www.djangoproject.com/">Django</a></p>
 </footer>
 
 </body>

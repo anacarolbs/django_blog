@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Category, Comment, Post, Reaction, PostRating, PostSuggestion #importar models a serem registradas na pãgina admin
+from blog.models import Category, Comment, Post, Reaction, PostRating, PostSuggestion, VotePoll 
 
 #definir como vazias as classes
 class CategoryAdmin(admin.ModelAdmin):
@@ -27,3 +27,7 @@ admin.site.register(Comment, CommentAdmin)
 admin.site.register(Reaction, ReactionAdmin)
 admin.site.register(PostRating, PostRatingAdmin)
 admin.site.register(PostSuggestion, PostSuggestionAdmin)
+
+@admin.register(VotePoll)
+class VotePollAdmin(admin.ModelAdmin):
+    list_display = ("question", "votes_option_one", "votes_option_two", "votes_option_three")

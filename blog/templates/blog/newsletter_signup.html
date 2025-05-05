@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    <h2>Inscreva-se na Newsletter</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Inscrever-se</button>
+    </form>
+    
+    <p>Receba as últimas novidades diretamente no seu e-mail!</p>
+{% endblock page_content %}

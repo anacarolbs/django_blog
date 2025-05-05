@@ -20,7 +20,7 @@
     {% if post.reactions.all %}
         <p>
             {% for reaction in post.reactions.all %}
-                {{ reaction.reaction_type }} - {{ reaction.user.username }}
+                {{ reaction.REACTION_CHOICES.0.1 }} - {{ reaction.user.username }}
             {% endfor %}
         </p>
     {% else %}

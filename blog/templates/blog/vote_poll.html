@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <h2>{{ poll.question }}</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label>
+                <input type="radio" name="option" value="option_one">
+                {{ poll.option_one }}
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="option" value="option_two">
+                {{ poll.option_two }}
+            </label>
+        </div>
+        {% if poll.option_three %}
+        <div>
+            <label>
+                <input type="radio" name="option" value="option_three">
+                {{ poll.option_three }}
+            </label>
+        </div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Votar</button>
+    </form>
+{% endblock page_content %}
