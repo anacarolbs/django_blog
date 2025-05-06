@@ -6,58 +6,75 @@
 
 {% block page_content %}
     <small>
+        <!-- Exibe a data de criação do post e suas categorias -->
         {{ post.created_on.date }} | Categorias:
         {% for category in post.categories.all %}
+        <!-- Link para a página da categoria -->
             <a href="{% url 'blog_category' category.name %}">
                 {{ category.name }}
             </a>
         {% endfor %}
     </small>
-    
+    <!-- Exibe o corpo do post com quebras de linha formatadas -->
     <p>{{ post.body | linebreaks }}</p>
 
     <h3>Reações:</h3>
+    <!-- Exibe as reações ao post, se houver -->
     {% if post.reactions.all %}
         <p>
             {% for reaction in post.reactions.all %}
+            <!-- Exibe o tipo de reação e o nome do usuário que reagiu -->
                 {{ reaction.REACTION_CHOICES.0.1 }} - {{ reaction.user.username }}
             {% endfor %}
         </p>
     {% else %}
+    <!-- Mensagem exibida se não houver reações -->
         <p>Ninguém reagiu ainda. Seja o primeiro!</p>
     {% endif %}
 
     <h3>Avaliação:</h3>
     <p>
         {% if post.ratings.count > 0 %}
+        <!-- Exibe a média de avaliações se houver -->
             Média de {{ post.ratings.aggregate_avg }} estrelas
         {% else %}
+        <!-- Mensagem exibida se não houver avaliações -->
             Ainda sem avaliações.
         {% endif %}
     </p>
 
+    <!-- Formulário para envio de comentários -->
     <h3>Deixe seu comentário:</h3>
     <form method="post">
+        
+         <!-- Token CSRF para proteger o formulário contra ataques CSRF -->
         {% csrf_token %}
         <div>
+            <!-- Campo para o autor do comentário -->
             {{ form.author }}
         </div>
         <div>
+            <!-- Campo para o corpo do comentário -->
             {{ form.body }}
         </div>
+        <!-- Botão para enviar o formulário -->
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 
     <h3>Comentários:</h3>
+    <!-- Loop para exibir os comentários existentes -->
     {% for comment in comments %}
         <p>
+            <!-- Exibe a data e o autor do comentário -->
             Em {{ comment.created_on.date }}, <b>{{ comment.author }}</b> escreveu:
         </p>
         <p>
+            <!-- Exibe o corpo do comentário com quebras de linha formatadas -->
             {{ comment.body | linebreaks }}
         </p>
     {% endfor %}
-
+    
+    <!-- Link para a página de sugestões de post -->
     <h3>Sugestões de Post:</h3>
     <p><a href="{% url 'blog_suggestions' %}">Ver sugestões de post enviadas por usuários</a></p>
 

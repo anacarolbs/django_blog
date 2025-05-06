@@ -14,4 +14,8 @@ urlpatterns = [
     path("vote-poll/<int:poll_id>/", views.vote_poll, name="vote_poll"),
     path("poll-results/<int:poll_id>/", views.poll_results, name="poll_results"),
     path("create-post/", views.create_blog_post, name="create_blog_post"),
+    path('suggestion-success/', views.suggestion_success, name='suggestion_success'),
+    path('event-success/', views.event_success, name='event_success'),
+    path('blog-post-success', views.blog_post_success, name='blog_post_success'),
+    path('newsletter-success', views.newsletter_success, name='newsletter_success'),
 ]

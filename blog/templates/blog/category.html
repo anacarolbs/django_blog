@@ -1,8 +1,16 @@
+
 {% extends "base.html" %}
 
 {% block page_content %}
+    
+    <!-- Loop que percorre a lista de posts passada pelo contexto da view -->
     {% for post in posts %}
+        <!-- Exibe o título do post como um link para a página de detalhes -->
         <h3><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></h3>
-        <p>{{ post.body | slice:":400" }}...</p>
+        
+        <!-- Exibe os primeiros 100 caracteres do corpo do post -->
+        <p>{{ post.body | slice:":100" }}...</p>
     {% endfor %}
+    
+    <!-- Fim do bloco page_content -->
 {% endblock page_content %}

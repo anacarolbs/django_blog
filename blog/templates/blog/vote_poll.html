@@ -1,32 +1,42 @@
+<!-- template segunda entrega -->
+<!-- template para exibir uma enquete e permitir que os usuários votem -->
 {% extends "base.html" %}
 
 {% block page_title %}
+<!-- Exibe a pergunta da enquete como o título da página -->
     <h2>{{ poll.question }}</h2>
 {% endblock page_title %}
 
 {% block page_content %}
+<!-- Formulário para envio do voto -->
     <form method="post">
+        <!-- Token CSRF para proteger o formulário contra ataques CSRF -->
         {% csrf_token %}
         <div>
             <label>
+                <!-- Opção 1 da enquete -->
                 <input type="radio" name="option" value="option_one">
                 {{ poll.option_one }}
             </label>
         </div>
         <div>
             <label>
+                <!-- Opção 2 da enquete -->
                 <input type="radio" name="option" value="option_two">
                 {{ poll.option_two }}
             </label>
         </div>
+        <!-- Verifica se há uma terceira opção de votação -->
         {% if poll.option_three %}
         <div>
             <label>
+                <!-- Opção 3 da enquete (se existir) -->
                 <input type="radio" name="option" value="option_three">
                 {{ poll.option_three }}
             </label>
         </div>
         {% endif %}
+        <!-- Botão para enviar o formulário com o voto -->
         <button type="submit" class="btn btn-primary">Votar</button>
     </form>
 {% endblock page_content %}

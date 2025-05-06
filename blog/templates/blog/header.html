@@ -1,0 +1,23 @@
+<!-- template segunda entrega -->
+<header>
+    <h1>Django Blog</h1>
+    <p>Compartilhando ideias e conhecimento</p>
+    <nav>
+        <a href="{% url 'blog_index' %}" class="{% if request.resolver_match.url_name == 'blog_index' %}active{% endif %}">
+            Home</a>
+        <a href="{% url 'blog_suggestions' %}" class="{% if request.resolver_match.url_name == 'blog_suggestions' %}active{% endif %}">
+            Sugestões</a>
+        <a href="{% url 'submit_suggestion' %}" class="{% if request.resolver_match.url_name == 'submit_suggestion' %}active{% endif %}">
+            Enviar Sugestão</a>
+        <a href="{% url 'newsletter_signup' %}" class="{% if request.resolver_match.url_name == 'newsletter_signup' %}active{% endif %}">
+            Newsletter</a>
+        <a href="{% url 'register_event' %}" class="{% if request.resolver_match.url_name == 'register_event' %}active{% endif %}">
+            Registrar evento</a>
+        <a href="{% url 'create_poll' %}" class="{% if request.resolver_match.url_name == 'create_poll' %}active{% endif %}">
+            Submeter Enquete</a>
+        <a href="{% url 'vote_poll' 1 %}" class="{% if request.resolver_match.url_name == 'vote_poll' %}active{% endif %}">
+            Votar em Enquete</a>
+        <a href="{% url 'create_blog_post' %}" class="{% if request.resolver_match.url_name == 'create_blog_post' %}active{% endif %}"> 
+            Submeter Post</a>
+    </nav>
+</header>

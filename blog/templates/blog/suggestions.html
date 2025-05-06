@@ -1,16 +1,22 @@
+<!-- template para exibir as sugestões de post enviadas pelos usuários -->
 {% extends "base.html" %}
-
 {% block page_title %}
     <h2>Sugestões de Post</h2>
 {% endblock page_title %}
 
 {% block page_content %}
+<!-- Loop que percorre a lista de sugestões passada pelo contexto da view -->
     {% for suggestion in suggestions %}
         <div>
+            <!-- Exibe o título da sugestão -->
             <h3>{{ suggestion.title }}</h3>
+            <!-- Exibe o nome do usuário que enviou a sugestão -->
             <p><strong>Usuário:</strong> {{ suggestion.user.username }}</p>
+            <!-- Exibe a descrição da sugestão -->
             <p>{{ suggestion.description }}</p>
+            <!-- Exibe o status da sugestão (ex.: pendente, aprovado, rejeitado) -->
             <p>Status: {{ suggestion.status }}</p>
         </div>
+        <!-- Fim do loop que percorre as sugestões -->
     {% endfor %}
 {% endblock page_content %}

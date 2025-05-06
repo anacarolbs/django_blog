@@ -129,3 +129,10 @@ body {
     background-color: #218838;
 }
 
+nav a.active {
+    background-color: #1527ae; /* Cor de fundo azul escuro */
+    color: white; /* Cor do texto */
+    font-weight: bold;
+    border: 2px solid #ffffff; /* Borda branca para destaque */
+    transform: scale(1.05); /* Leve aumento no tamanho */
+}

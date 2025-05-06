@@ -160,32 +160,15 @@
     </style>
 </head>
 <body>
+    {% include "blog/header.html" %}
 
-<header>
-    <h1>Django Blog</h1>
-    <p>Compartilhando ideias e conhecimento</p>
-    <nav>
-        <a href="{% url 'blog_index' %}"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="{% url 'blog_suggestions' %}"><i class="fa-solid fa-lightbulb"></i> Sugestões</a>
-        <a href="{% url 'submit_suggestion' %}"><i class="fa-solid fa-pen"></i> Enviar Sugestão</a>
-        <a href="{% url 'newsletter_signup' %}" class="highlight"><i class="fa-solid fa-envelope"></i> Newsletter</a>
-        <a href="{% url 'register_event' %}"><i class="fa-solid fa-calendar"></i> Eventos</a>
-        <a href="{% url 'create_poll' %}"><i class="fa-solid fa-chart-bar"></i> Enquetes</a>
-        <a href="{% url 'vote_poll' 1 %}"><i class="fa-solid fa-chart-bar"></i> Votar em Enquete</a>
-        <a href="{% url 'create_blog_post' %}"><i class="fa-solid fa-cogs"></i> Submeter Post</a>
-    </nav>
-</header>
+    <main>
+        {% block page_title %}{% endblock page_title %}
+        {% block page_content %}{% endblock page_content %}
+    </main>
 
-<main>
-    {% block page_title %}{% endblock page_title %}
-    {% block page_content %}{% endblock page_content %}
-</main>
-
-<footer>
-    <br>
-    <p>&copy; 2025 Django Blog | Desenvolvido para Aplicações para Internet</p>
-    <br>
-</footer>
+    {% include "blog/footer.html" %}
+</body>
 
 <a href="#" id="back-to-top" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></a>
 
