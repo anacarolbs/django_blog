@@ -25,6 +25,7 @@ Criar um **blog**, onde usuários possam:
 - Django 5.2
 - SQLite/PostgreSQL
 - HTML/CSS (para estilização)
+- Bootstrap 5
 
 
 ## 📌 Especificações do Projeto
