@@ -1,16 +1,23 @@
+<!-- template segunda entrega -->
+<!-- template para exibir os resultados de uma enquete -->
 {% extends "base.html" %}
-
 {% block page_title %}
     <h2>Resultados: {{ poll.question }}</h2>
 {% endblock page_title %}
 
 {% block page_content %}
     <ul>
+        <!-- Lista os resultados das opções de votação -->
+         <!-- Exibe a primeira opção e o número de votos recebidos -->
         <li>{{ poll.option_one }}: {{ poll.votes_option_one }} votos</li>
+        <!-- Exibe a segunda opção e o número de votos recebidos -->
         <li>{{ poll.option_two }}: {{ poll.votes_option_two }} votos</li>
+        <!-- Verifica se há uma terceira opção de votação -->
         {% if poll.option_three %}
+        <!-- Exibe a terceira opção e o número de votos recebidos, se existir -->
         <li>{{ poll.option_three }}: {{ poll.votes_option_three }} votos</li>
         {% endif %}
     </ul>
+    <!-- Link para voltar à página de votação da enquete -->
     <a href="{% url 'vote_poll' poll.id %}" class="btn btn-secondary">Voltar à Votação</a>
 {% endblock page_content %}

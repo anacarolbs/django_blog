@@ -1,0 +1,11 @@
+<!-- template segunda entrega -->
+<!-- a mensagem será exibida ao submeter uma sugestao de evento -->
+{% extends "base.html" %}
+{% block page_content %}
+    <div class="text-center mt-5">
+        <h2>Obrigado pela sugestão de evento!</h2>
+        <p>A sugestão de evento foi registrada com sucesso.</p>
+
+        <a href="{% url 'blog_index' %}" class="btn btn-primary">Voltar à página inicial</a>
+    </div>
+{% endblock page_content %}

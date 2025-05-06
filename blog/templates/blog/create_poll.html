@@ -1,4 +1,7 @@
+<!-- template segunda entrega -->
+
 {% extends "base.html" %}
+<!-- Carrega as tags do pacote crispy-forms para estilizar o formulário -->
 {% load crispy_forms_tags %}
 
 {% block page_title %}
@@ -7,8 +10,11 @@
 
 {% block page_content %}
     <form method="post">
+        <!-- Token CSRF para proteger o formulário contra ataques CSRF (Cross-Site Request Forgery) -->
         {% csrf_token %}
+        <!-- Renderiza o formulário utilizando o estilo do crispy-forms -->
         {{ form|crispy }}
+        <!-- Botão para enviar o formulário -->
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 {% endblock page_content %}

@@ -1,51 +1,68 @@
-<!-- blog/templates/blog/index.html -->
 {% extends "base.html" %}
+<!-- Carrega os filtros personalizados definidos no arquivo blog_filters.py -->
+{% load blog_filters %}
 
 {% block page_title %}
     <h2 class="page-title"> Blog Posts</h2>
 {% endblock page_title %}
 
 {% block page_content %}
+<!-- Container para exibir os posts -->
     <div class="posts-container">
+        <!-- Loop que percorre a lista de posts passada pelo contexto da view -->
         {% for post in posts %}
+        <!-- Cada post é exibido dentro de um "cartão" -->
             <div class="post-card">
-                <h3><a href="{% url 'blog_detail' post.pk %}" class="post-title">{{ post.title }}</a></h3>
 
+                <!-- Filtro 1: Truncar o título -->
+                 <!-- Exibe o título do post truncado em até 50 caracteres -->
+                <h3><a href="{% url 'blog_detail' post.pk %}" class="post-title">{{ post.title|truncate_chars:50 }}</a></h3>
+
+                <!-- Filtro 2: Formatar a data -->
                 <div class="post-meta">
-                    <small>📅 {{ post.created_on.date }} | 📂 Categorias:</small>
+                    <!-- Exibe a data de criação formatada e as categorias do post -->
+                    <small>📅 {{ post.created_on|format_date }} | 📂 Categorias:</small>
                     <p>
+                        <!-- Filtro 3: Converter categorias para maiúsculas -->
                         {% for category in post.categories.all %}
                             <span class="category-btn">
-                                <a href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
+                                <!-- Exibe o nome da categoria em letras maiúsculas -->
+                                <a href="{% url 'blog_category' category.name %}">{{ category.name|to_uppercase }}</a>
                             </span>
                         {% endfor %}
                     </p>
                 </div>                
 
-                <p class="post-content">{{ post.body | slice:":400" }}...</p>
+                <!-- Exibe o corpo do post truncado em até 400 caracteres -->
+                <p class="post-content">{{ post.body|truncate_chars:400 }}</p>
 
+                <!-- Exibe as reações ao post -->
                 <div class="post-extras">
                     <p><strong> Reações:</strong> 
                         {% if post.reactions.all %}
                             {% for reaction in post.reactions.all %}
+                            <!-- Exibe o tipo de reação -->
                                 <span class="reaction">{{ reaction.reaction_type }}</span>
                             {% endfor %}
                         {% else %}
+                        <!-- Mensagem exibida se não houver reações -->
                             <span class="no-reaction">Nenhuma reação ainda.</span>
                         {% endif %}
                     </p>
                 </div>
                 
 
-                    <p><strong> Avaliação:</strong> Média de 
-                        {% if post.ratings.count > 0 %}
-                            <span class="rating">{{ post.ratings.aggregate_avg }} estrelas</span>
-                        {% else %}
-                            <span class="no-rating">Ainda sem avaliações.</span>
-                        {% endif %}
-                    </p>
-                </div>
+                <p><strong> Avaliação:</strong> Média de 
+                    {% if post.ratings.count > 0 %}
+                    <!-- Exibe a média de avaliações se houver -->
+                        <span class="rating">{{ post.ratings.aggregate_avg }} estrelas</span>
+                    {% else %}
+                    <!-- Mensagem exibida se não houver avaliações -->
+                        <span class="no-rating">Ainda sem avaliações.</span>
+                    {% endif %}
+                </p>
 
+                <!-- Link para a página de sugestões de post -->
                 <p class="suggestion-link">
                     <a href="{% url 'blog_suggestions' %}" class="btn-suggestions"> Ver sugestões de post</a>
                 </p>

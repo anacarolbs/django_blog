@@ -1,0 +1,11 @@
+<!-- template segunda entrega -->
+<!-- a mensagem será exibida ao submeter um post COMPLETO como sugestao-->
+{% extends "base.html" %}
+{% block page_content %}
+    <div class="text-center mt-5">
+        <h2>Obrigado por enviar sua ideia de post!</h2>
+        <p>Sua ideia foi registrada com sucesso e será analisada pela nossa equipe.</p>
+
+        <a href="{% url 'blog_index' %}" class="btn btn-primary">Voltar à página inicial</a>
+    </div>
+{% endblock page_content %}
