@@ -76,14 +76,35 @@ O código deve conter:
 ## 📂 Estrutura do Projeto
 ```bash
 django_blog/
-│── blog/
-│   ├── models.py       # Definição das models
-│   ├── views.py        # Lógica das páginas
-│   ├── urls.py         # Rotas do projeto
-│   ├── templates/      # HTML dos templates
-│   ├── static/         # Arquivos CSS/JS/imagens
-│   ├── forms.py        # Definição dos formulários
-│   ├── admin.py        # Configuração do Django Admin
+├── blog/                         # Aplicativo principal do blog
+│   ├── migrations/               # Arquivos de migração do banco de dados
+│   ├── static/                   # Arquivos estáticos (CSS, JS, imagens)
+│   ├── templates/                # Templates HTML do aplicativo
+│   │   ├── blog/                 # Templates específicos do blog
+│   │   │   ├── base.html         # Template base para herança
+│   │   │   ├── index.html        # Página inicial do blog
+│   │   │   ├── post_list.html    # Lista de posts
+│   │   │   ├── post_detail.html  # Detalhes de um post
+│   │   │   ├── post_form.html    # Formulário para criar/editar posts
+│   │   │   ├── confirm_delete_post.html # Página de confirmação de exclusão
+│   │   │   └── ...               # Outros templates
+│   ├── templatetags/             # Filtros personalizados para templates
+│   │   └── blog_filters.py       # Filtros personalizados do blog
+│   ├── admin.py                  # Configuração do painel de administração
+│   ├── apps.py                   # Configuração do aplicativo
+│   ├── forms.py                  # Formulários do blog
+│   ├── models.py                 # Modelos do banco de dados
+│   ├── urls.py                   # Rotas do aplicativo
+│   ├── views.py                  # Views do aplicativo
+│   └── tests.py                  # Testes automatizados
+├── personal_blog/                # Configurações do projeto Django
+│   ├── settings.py               # Configurações globais do projeto
+│   ├── urls.py                   # Rotas globais do projeto
+│   ├── wsgi.py                   # Configuração do WSGI
+│   └── asgi.py                   # Configuração do ASGI
+├── manage.py                     # Script de gerenciamento do Django
+├── db.sqlite3                    # Banco de dados SQLite (padrão)
+└── README.md                     # Documentação do projeto
 ```
 
 ---
