@@ -31,7 +31,7 @@ Criar um **blog**, onde usuários possam:
 ## 📌 Especificações do Projeto
 ### Módulo de Models
 08/04 - Django Models e Databases  
-15/04 - Django Forms e ModelForms
+15/04 - Django Forms e ModelForms  
 O código deve conter:
 - 3 Relações (_ForeignKey_, _ManyToMany_, _OneToOne_)
 - 6 Models (representando entidades do blog)
@@ -41,7 +41,7 @@ O código deve conter:
 
 ### Módulo de Templates
 22/04 - Django Template e Bootstrap  
-29/04 - Crispy Forms e Weasy Print
+29/04 - Crispy Forms e Weasy Print  
 O código deve conter:
 - 3 Templates
 - 3 Forms 
