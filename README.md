@@ -55,6 +55,17 @@ O código deve conter:
 ### Módulo de Views
 06/05 - Django Views e ModelViews  
 13/05 - Django Class-Based Generic Views
+O código deve conter:
+- 1 Classe Criar
+- 1 Classe Editar 
+- 1 Classe Detalhar
+- 1 Classe Listar 
+- 1 Classe Deletar 
+- 1 Método Criar 
+- 1 Método Editar
+- 1 Método Detalhar 
+- 1 Método Listar 
+- 1 Método Deletar
 
 ### Módulo de API
 20/05 - Django Rest Framework  
