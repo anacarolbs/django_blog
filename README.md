@@ -54,7 +54,7 @@ O código deve conter:
 
 ### Módulo de Views
 06/05 - Django Views e ModelViews  
-13/05 - Django Class-Based Generic Views
+13/05 - Django Class-Based Generic Views  
 O código deve conter:
 - 1 Classe Criar
 - 1 Classe Editar 
