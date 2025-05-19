@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <h2>Lista de Todos os Comentários</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    {% for comment in comments %}
+        <div class="card mb-3">
+            <div class="card-header">
+                Comentário de <strong>{{ comment.author }}</strong> em 
+                <a href="{% url 'blog_detail' pk=comment.post.pk %}">"{{ comment.post.title }}"</a>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><small class="text-muted">{{ comment.created_on|date:"d/m/Y H:i" }}</small></p>
+                <p class="card-text">{{ comment.body|truncatewords:50|linebreaks }}</p>
+                <a href="{% url 'comment_detail_cbv' pk=comment.pk %}" class="btn btn-sm btn-info">Ver Detalhe</a>
+                <a href="{% url 'comment_update_cbv' pk=comment.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'comment_delete_cbv' pk=comment.pk %}" class="btn btn-sm btn-danger">Deletar</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>Nenhum comentário encontrado no blog.</p>
+    {% endfor %}
+
+    {% if is_paginated %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Próxima</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock page_content %}

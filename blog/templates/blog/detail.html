@@ -1,81 +1,87 @@
 {% extends "base.html" %}
-
-{% block page_title %}
+{% load crispy_forms_tags %} {% block page_title %}
     <h2>{{ post.title }}</h2>
 {% endblock page_title %}
 
 {% block page_content %}
     <small>
-        <!-- Exibe a data de criação do post e suas categorias -->
         {{ post.created_on.date }} | Categorias:
         {% for category in post.categories.all %}
-        <!-- Link para a página da categoria -->
-            <a href="{% url 'blog_category' category.name %}">
+        <a href="{% url 'blog_category' category.name %}">
                 {{ category.name }}
-            </a>
+            </a>{% if not forloop.last %}, {% endif %}
         {% endfor %}
     </small>
-    <!-- Exibe o corpo do post com quebras de linha formatadas -->
     <p>{{ post.body | linebreaks }}</p>
 
     <h3>Reações:</h3>
-    <!-- Exibe as reações ao post, se houver -->
     {% if post.reactions.all %}
         <p>
             {% for reaction in post.reactions.all %}
-            <!-- Exibe o tipo de reação e o nome do usuário que reagiu -->
-                {{ reaction.REACTION_CHOICES.0.1 }} - {{ reaction.user.username }}
+            {{ reaction.get_reaction_type_display }} - {{ reaction.user.username }}
             {% endfor %}
         </p>
     {% else %}
-    <!-- Mensagem exibida se não houver reações -->
-        <p>Ninguém reagiu ainda. Seja o primeiro!</p>
+    <p>Ninguém reagiu ainda. Seja o primeiro!</p>
     {% endif %}
 
     <h3>Avaliação:</h3>
     <p>
         {% if post.ratings.count > 0 %}
-        <!-- Exibe a média de avaliações se houver -->
-            Média de {{ post.ratings.aggregate_avg }} estrelas
+        {{ post.ratings.count }} avaliação(ões) recebida(s).
         {% else %}
-        <!-- Mensagem exibida se não houver avaliações -->
-            Ainda sem avaliações.
+        Ainda sem avaliações.
         {% endif %}
     </p>
 
-    <!-- Formulário para envio de comentários -->
-    <h3>Deixe seu comentário:</h3>
+    <h3 class="mt-4">Deixe seu comentário:</h3>
     <form method="post">
-        
-         <!-- Token CSRF para proteger o formulário contra ataques CSRF -->
         {% csrf_token %}
-        <div>
-            <!-- Campo para o autor do comentário -->
+        <div class="mb-3">
+            <label for="{{ form.author.id_for_label }}" class="form-label">{{ form.author.label }}</label>
             {{ form.author }}
         </div>
-        <div>
-            <!-- Campo para o corpo do comentário -->
+        {% if form.email.field.required == False %} <div class="mb-3">
+            <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+            {{ form.email }}
+        </div>
+        {% endif %}
+        <div class="mb-3">
+            <label for="{{ form.body.id_for_label }}" class="form-label">{{ form.body.label }}</label>
             {{ form.body }}
         </div>
-        <!-- Botão para enviar o formulário -->
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 
-    <h3>Comentários:</h3>
-    <!-- Loop para exibir os comentários existentes -->
+    <h3 class="mt-5">Comentários ({{ comments.count }}):</h3>
     {% for comment in comments %}
-        <p>
-            <!-- Exibe a data e o autor do comentário -->
-            Em {{ comment.created_on.date }}, <b>{{ comment.author }}</b> escreveu:
-        </p>
-        <p>
-            <!-- Exibe o corpo do comentário com quebras de linha formatadas -->
-            {{ comment.body | linebreaks }}
-        </p>
+        <div class="card mb-3" id="comment-{{ comment.pk }}">
+            <div class="card-body">
+                <p class="card-subtitle mb-2 text-muted">
+                    Em {{ comment.created_on|date:"d/m/Y H:i" }}, <b>{{ comment.author }}</b> escreveu:
+                </p>
+                <p class="card-text">{{ comment.body | linebreaks }}</p>
+                <p>
+                    <a href="{% url 'comment_detail_cbv' pk=comment.pk %}" class="btn btn-sm btn-outline-info">Detalhe</a>
+                    <a href="{% url 'comment_update_cbv' pk=comment.pk %}" class="btn btn-sm btn-outline-warning">Editar (CBV)</a>
+                    <a href="{% url 'comment_delete_cbv' pk=comment.pk %}" class="btn btn-sm btn-outline-danger">Deletar (CBV)</a>
+                    </p>
+            </div>
+        </div>
+    {% empty %}
+        <p>Ainda não há comentários para este post.</p>
     {% endfor %}
     
-    <!-- Link para a página de sugestões de post -->
-    <h3>Sugestões de Post:</h3>
+    <div class="mt-4">
+        <a href="{% url 'comment_create_cbv' post_pk=post.pk %}" class="btn btn-success">Adicionar Novo Comentário (Página Dedicada - CBV)</a>
+        <a href="{% url 'comment_create_fbv' post_pk=post.pk %}" class="btn btn-info mt-2">Adicionar Novo Comentário (Página Dedicada - FBV)</a>
+    </div>
+
+    <div class="mt-4">
+        <a href="{% url 'comment_list_all_cbv' %}" class="btn btn-light">Ver Lista de Todos os Comentários (CBV)</a>
+    </div>
+
+    <h3 class="mt-5">Sugestões de Post:</h3>
     <p><a href="{% url 'blog_suggestions' %}">Ver sugestões de post enviadas por usuários</a></p>
 
 {% endblock page_content %}

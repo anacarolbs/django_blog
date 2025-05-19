@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <h2>Detalhe do Comentário</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    <div class="card">
+        <div class="card-header">
+            Comentário de: <strong>{{ comment.author }}</strong>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">No post: <a href="{% url 'blog_detail' pk=comment.post.pk %}">{{ comment.post.title }}</a></h5>
+            <p class="card-text"><small class="text-muted">Escrito em: {{ comment.created_on|date:"d/m/Y H:i" }}</small></p>
+            <p class="card-text">{{ comment.body|linebreaks }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'comment_update_cbv' pk=comment.pk %}" class="btn btn-sm btn-warning">Editar Comentário</a>
+            <a href="{% url 'comment_delete_cbv' pk=comment.pk %}" class="btn btn-sm btn-danger">Deletar Comentário</a>
+            <a href="{% url 'blog_detail' pk=comment.post.pk %}#comment-{{ comment.pk }}" class="btn btn-sm btn-outline-secondary">Voltar para o post</a>
+        </div>
+    </div>
+{% endblock page_content %}
