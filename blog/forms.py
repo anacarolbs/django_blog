@@ -1,5 +1,6 @@
 from django import forms
 from .models import PostSuggestion
+from .models import Comment
 
 # Formulário para comentários
 class CommentForm(forms.Form):
@@ -126,3 +127,16 @@ class EventRegistrationForm(forms.Form):
         widget=forms.Textarea(attrs={"class": "form-control", "placeholder": "Descrição do Evento", "rows": 4}),
         label="Descrição",
     )
+    
+class CommentModelForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['author', 'body'] # Campos do seu modelo Comment
+        widgets = {
+            'author': forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Seu Nome"}
+            ),
+            'body': forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Deixe um comentário!", "rows": 4}
+            ),
+        }
