@@ -7,7 +7,7 @@ class CommentForm(forms.Form):
     # Campo para o nome do autor do comentário
     author = forms.CharField(
         max_length=60,
-        label="Autor",  # Rótulo em português
+        label="Autor",  
         widget=forms.TextInput(
             attrs={"class": "form-control", "placeholder": "Seu Nome"}
         ),
@@ -15,14 +15,14 @@ class CommentForm(forms.Form):
     # Campo para o e-mail do autor (opcional)
     email = forms.EmailField(
         required=False,
-        label="E-mail",  # Rótulo em português
+        label="E-mail",  
         widget=forms.EmailInput(
             attrs={"class": "form-control", "placeholder": "Seu Email (opcional)"}
         ),
     )
     # Campo para o corpo do comentário
     body = forms.CharField(
-        label="Comentário",  # Rótulo em português
+        label="Comentário",  
         widget=forms.Textarea(
             attrs={"class": "form-control", "placeholder": "Deixe um comentário!", "rows": 4}
         ),
