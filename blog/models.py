@@ -59,19 +59,20 @@ class Post(models.Model):
 # Model de Comentários
 class Comment(models.Model):
     # Nome do autor do comentário.
-    author = models.CharField(max_length=60)
+    author = models.CharField(max_length=60, verbose_name="Autor")
     # Corpo do comentário.
-    body = models.TextField()
+    body = models.TextField(verbose_name="Comentário")
     # Data de criação do comentário.
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True, verbose_name="Data de criação")
     # Relacionamento com o post. Se o post for excluído, os comentários também serão.
-    post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments") #relacionamento entre post e comentarios: many-to-one relationship (muitos comentarios podem estar em UM post, mas nao pode ter o mesmo comentario em varios posts)
+    post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments", verbose_name="Post") #relacionamento entre post e comentarios: many-to-one relationship (muitos comentarios podem estar em UM post, mas nao pode ter o mesmo comentario em varios posts)
     # Indica se o comentário foi aprovado.
-    is_approved = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=False, verbose_name="Aprovado")
 
 # Configurações adicionais: nome plural e ordenação por data de criação.
     class Meta:
         ordering = ["created_on"]
+        verbose_name = "Comentário"
         verbose_name_plural = "Comments"
     #corrigir o nome do item para o que foi cadastrado 
     def __str__(self):
