@@ -55,7 +55,10 @@ cover/
 *.mo
 *.pot
 
-.venv
+
+/db.sqlite3
+__pycache__/
+.log
 
 # Django stuff:
 *.log
@@ -174,3 +177,32 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+# Arquivos do sistema
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+
+# Diretórios do Python
+__pycache__/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Configurações locais
+*.env
+
+# Diretórios do Django
+/static/
+media/
+migrations/
+
+# Arquivos do editor
+.vscode/
+.idea/
+*.swp
