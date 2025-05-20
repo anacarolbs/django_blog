@@ -63,8 +63,8 @@
                 <p class="card-text">{{ comment.body | linebreaks }}</p>
                 <p>
                     <a href="{% url 'comment_detail_cbv' pk=comment.pk %}" class="btn btn-sm btn-outline-info">Detalhe</a>
-                    <a href="{% url 'comment_update_cbv' pk=comment.pk %}" class="btn btn-sm btn-outline-warning">Editar (CBV)</a>
-                    <a href="{% url 'comment_delete_cbv' pk=comment.pk %}" class="btn btn-sm btn-outline-danger">Deletar (CBV)</a>
+                    <a href="{% url 'comment_update_cbv' pk=comment.pk %}" class="btn btn-sm btn-outline-warning">Editar</a>
+                    <a href="{% url 'comment_delete_cbv' pk=comment.pk %}" class="btn btn-sm btn-outline-danger">Deletar</a>
                     </p>
             </div>
         </div>
@@ -72,13 +72,9 @@
         <p>Ainda não há comentários para este post.</p>
     {% endfor %}
     
-    <div class="mt-4">
-        <a href="{% url 'comment_create_cbv' post_pk=post.pk %}" class="btn btn-success">Adicionar Novo Comentário (Página Dedicada - CBV)</a>
-        <a href="{% url 'comment_create_fbv' post_pk=post.pk %}" class="btn btn-info mt-2">Adicionar Novo Comentário (Página Dedicada - FBV)</a>
-    </div>
 
     <div class="mt-4">
-        <a href="{% url 'comment_list_all_cbv' %}" class="btn btn-light">Ver Lista de Todos os Comentários (CBV)</a>
+        <a href="{% url 'comment_list_all_cbv' %}" class="btn btn-light">Ver Lista de Todos os Comentários</a>
     </div>
 
     <h3 class="mt-5">Sugestões de Post:</h3>
