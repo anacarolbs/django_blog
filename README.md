@@ -111,43 +111,43 @@ django_blog/
 ---
 
 ## 🚀 Comandos Essenciais
-### ▶️ **Criar o diretório**
+### **Criar o diretório**
 ```bash
 mkdir django-blog
 $ cd django-blog
 ```
-### ▶️ **Criar um ambiente virtual**
+### **Criar um ambiente virtual**
 ```bash
 python -m venv venv
 ```
-### ▶️ **Ativar o ambiente virtual**
+### **Ativar o ambiente virtual**
 ```bash
 source venv/bin/activate
 ```
-### ▶️ **Instalar o django**
+### **Instalar o django**
 ```bash
 python -m pip install Django
 ```
-### ▶️ **Criar o projeto**
+### **Criar o projeto**
 ```bash
 django-admin startproject personal_blog 
 ``` 
-### ▶️ **Criar e aplicar as migrações**
+### **Criar e aplicar as migrações**
 ```bash
 python manage.py makemigrations  # Criação das migrações
 python manage.py migrate         # Aplicação das migrações
 ```
-### ▶️ **Iniciar o servidor de desenvolvimento**
+### **Iniciar o servidor de desenvolvimento**
 ```bash
 python manage.py runserver
 ```
-### ▶️ **Acessar o localhost**
+### **Acessar o localhost**
 http://localhost:8000 
-### ▶️ **Criar a aplicação**
+### **Criar a aplicação**
 ```bash
 python manage.py startapp blog
 ```
-### ▶️ **Criar Superusuário**
+### **Criar Superusuário**
 ```bash
 python manage.py createsuperuser  # Acesso ao Django Admin
 ```
