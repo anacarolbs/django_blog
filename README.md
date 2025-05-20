@@ -13,11 +13,11 @@ Este projeto tem como objetivo explorar o **Django** e suas principais funcional
 
 ## 🎯 Objetivo 
 Criar um **blog**, onde usuários possam:
-- 🔹 Publicar posts e categorias
-- 🔹 Adicionar comentários
-- 🔹 Enviar sugestões de novos posts
-- 🔹 Interagir com avaliações e reações
-- 🔹 Gerenciar conteúdo pelo **Django Admin**
+- Publicar posts e categorias
+- Adicionar comentários
+- Enviar sugestões de novos posts
+- Interagir com avaliações e reações
+- Gerenciar conteúdo pelo **Django Admin**
 
 
 ## 🔧 Tecnologias Utilizadas
@@ -26,6 +26,7 @@ Criar um **blog**, onde usuários possam:
 - SQLite/PostgreSQL
 - HTML/CSS (para estilização)
 - Bootstrap 5
+- FastAPI
 
 
 ## 📌 Especificações do Projeto
