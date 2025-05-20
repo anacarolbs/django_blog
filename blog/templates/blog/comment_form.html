@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %} {% block page_title %}
+    <h2>{{ page_title|default:"Formulário de Comentário" }}</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    {% if post %} <p class="text-muted">Referente ao post: <a href="{% url 'blog_detail' pk=post.pk %}">{{ post.title }}</a></p>
+    {% elif comment.post %} <p class="text-muted">Referente ao post: <a href="{% url 'blog_detail' pk=comment.post.pk %}">{{ comment.post.title }}</a></p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form|crispy }}
+        
+        <button type="submit" class="btn btn-primary mt-3">Salvar Comentário</button>
+    </form>
+
+    <div class="mt-3">
+        {% if comment %} <a href="{% url 'blog_detail' pk=comment.post.pk %}#comment-{{ comment.pk }}" class="btn btn-secondary">Cancelar</a>
+        {% elif post %} <a href="{% url 'blog_detail' pk=post.pk %}" class="btn btn-secondary">Cancelar</a>
+        {% else %} <a href="{% url 'blog_index' %}" class="btn btn-secondary">Cancelar</a>
+        {% endif %}
+    </div>
+{% endblock page_content %}

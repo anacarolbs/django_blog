@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    <h2>Confirmar Deleção de Comentário</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+    <p>Você tem certeza que quer deletar o seguinte comentário?</p>
+    
+    <div class="card my-3">
+        <div class="card-body">
+            <h5 class="card-title">Comentário de: {{ comment.author }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">No post: "{{ comment.post.title }}"</h6>
+            <p class="card-text"><em>"{{ comment.body|truncatewords:30 }}"</em></p>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sim, deletar este comentário</button>
+        <a href="{{ comment.get_absolute_url }}" class="btn btn-secondary">Cancelar</a> 
+        </form>
+{% endblock page_content %}
